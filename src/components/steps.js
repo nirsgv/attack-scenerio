@@ -51,7 +51,7 @@ function Steps({steps, team_id, updateCampaign}) {
                     {doneGroup.map((item, i) => <DoneStep step={item} key={i}/>)}
                 </List>
             </>}
-            
+
         </div>
     );
 }
