@@ -5,12 +5,8 @@ function ToHandleStep({step}) {
 
     const { status, step_id, step_name } = step;
 
-
-
-
     return (
     <div className={`step step--${status}`}>
-        <SvgSprite name="SKEE_MASK"/>
         <h3 className={'txt'}>{step_name}</h3>
     </div>
   );

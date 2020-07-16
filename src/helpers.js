@@ -14,4 +14,4 @@ const getCurrentTasks = async (cb) => {
     }
 };
 
-export {getCurrentTasks};
+export { getCurrentTasks };

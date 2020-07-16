@@ -4,7 +4,7 @@ import SvgSprite from "./svgSprite";
 function Preloader({  }) {
 
     return (
-        <div className={'preloader'}>
+        <div className={'preloader'} data-test="preloader">
             <SvgSprite name={'SPIDER'}/>
         </div>
   );

@@ -16,9 +16,7 @@ function App({ campaign, setCampaignStore, setSelectedTeam, selectedTeamId, sele
 
     const [ menuItems, setMenuItems ] = useState([]);
     const [ preloader, setPreloader ] = useState(false);
-    const [ reqCount, setReqCount ] = useState(0);
-
-const get =  (cb) => getCurrentTasks(cb)
+    const getItems =  (cb) => getCurrentTasks(cb)
         .then(data => {
             if (data) {
                 setCampaignStore(data);
@@ -33,21 +31,15 @@ const get =  (cb) => getCurrentTasks(cb)
         });
 
     useEffect(() => {
-        get(setPreloader);
-
-        return () => {
-
-        }
+        getItems(setPreloader);
     }, []);
 
-
-
     return (
-    <div className="App">
+    <div className="App" data-test="App">
       <aside className="aside">
           <section className="logo">
               <SvgSprite name='SKEE_MASK_DUATONE'/>
-              <button onClick={() => get(setPreloader)}>Monitor new threats</button>
+              <button onClick={() => getItems(setPreloader)}>Monitor new threats</button>
           </section>
           <nav className="main">
               <List baseClassName={'menu'}>

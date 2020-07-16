@@ -45,8 +45,8 @@ $logo-height: 14rem;
     display: flex;
     margin: 0 2rem 2rem 0;
     position: relative;
-    
-    &--not_started, &--in_progress{
+
+    &--in_progress{
         background-color: white;
         border: 1px solid #ccc;
         border-radius: .5rem;
@@ -54,6 +54,12 @@ $logo-height: 14rem;
         width: 24rem;
         min-height: 10rem;
         margin: 0 1rem 1rem 0;
+        color: $bkg-3;
+        animation-name: inProgress;
+        animation-iteration-count: infinite;
+        animation-direction: alternate-reverse;
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
 
         > span {
             color: #eee;
@@ -61,15 +67,9 @@ $logo-height: 14rem;
             margin-right: 0.8rem;
         }
     }
-
-    &--not_started{color: #eee;}
-    &--in_progress{
-        color: $bkg-3;
-        animation-name: inProgress;
-        animation-iteration-count: infinite;
-        animation-direction: alternate-reverse;
-        animation-duration: 1s;
-        animation-timing-function: ease-in-out;
+    &--not_started{
+        color:#fff;
+        display: block;
     }
     &--done {
         color:#666;
