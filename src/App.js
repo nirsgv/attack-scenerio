@@ -1,26 +1,79 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import './styles/main.scss';
+import Dashboard from "./components/dashboard";
+import SvgSprite from "./components/svgSprite";
+import List from "./components/list";
+import MenuItem from "./components/menuItem";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { setCampaignStore } from "./actions";
 
-function App() {
-  return (
+import {setSelectedTeam} from './actions';
+import Preloader from "./components/preloader";
+import {getCurrentTasks} from './helpers'
+
+function App({ campaign, setCampaignStore, setSelectedTeam, selectedTeamId, selectedTeamTitle }) {
+
+    const [ menuItems, setMenuItems ] = useState([]);
+    const [ preloader, setPreloader ] = useState(false);
+    const [ reqCount, setReqCount ] = useState(0);
+
+const get =  (cb) => getCurrentTasks(cb)
+        .then(data => {
+            if (data) {
+                setCampaignStore(data);
+                data && data.team_instances && data.team_instances[0] && data.team_instances[0].team_id &&
+                setSelectedTeam({id:data.team_instances[0].team_id, name:data.team_instances[0].team_name});
+                setMenuItems(data.team_instances
+                    .filter(item => item.steps.length)
+                    .map(item => Object.assign({}, {team_id:item.team_id, team_name:item.team_name})))
+            } else {
+                console.error(data);
+            }
+        });
+
+    useEffect(() => {
+        get(setPreloader);
+
+        return () => {
+
+        }
+    }, []);
+
+
+
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <aside className="aside">
+          <section className="logo">
+              <SvgSprite name='SKEE_MASK_DUATONE'/>
+              <button onClick={() => get(setPreloader)}>Monitor new threats</button>
+          </section>
+          <nav className="main">
+              <List baseClassName={'menu'}>
+                  {menuItems.map((item, i) => <MenuItem name={item.team_name} id={item.team_id} setSelectedTeam={setSelectedTeam} selectedTeamId={selectedTeamId} key={i}/>)}
+              </List>
+          </nav>
+      </aside>
+        {preloader
+            ? <Preloader />
+            : <Dashboard campaign={campaign} selectedTeamId={selectedTeamId} selectedTeamTitle={selectedTeamTitle}/>}
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+    campaign: state.appData.campaign,
+    selectedTeamId: state.appData.selectedTeamId,
+    selectedTeamTitle: state.appData.selectedTeamTitle,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+    setCampaignStore,
+    setSelectedTeam
+}, dispatch);
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);
