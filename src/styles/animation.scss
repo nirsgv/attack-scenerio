@@ -1,0 +1,22 @@
+
+
+.faded-in-from-bottom {
+  animation-name: fadedInFromBottom;
+  animation-duration: .45s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes fadedInFromBottom {
+  from {opacity: .05; transform: translate3d(0rem, .25rem, 0) }
+  to {opacity: 1; transform: translate3d(0rem, 0, 0) }
+}
+
+@keyframes btnInProgress {
+  from {background-color: $bkg-3; }
+  to {background-color: $bkg-2; }
+}
+
+@keyframes inProgress {
+  from {background-color: #ccc; }
+  to {background-color: #aaa; }
+}

@@ -1,0 +1,25 @@
+.btn {
+
+  background: $bkg-2;
+  border-radius: 1rem;
+  padding: 0.4rem;
+  cursor: pointer;
+  color: $highlight-2;
+  font-size: 1.3rem;
+  background-color: $bkg-3;
+
+  .logo:hover & {
+    color: $highlight-3;
+    background-color: darken($bkg-3, 10%);
+  }
+
+  &__wrap {
+    margin: auto;
+    text-align: center;
+  }
+
+  &__get-items {
+
+  }
+
+}

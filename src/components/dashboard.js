@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Campaign from './campaign';
+import { unCamelCase } from '../helpers';
 
 
 
@@ -13,7 +14,7 @@ function Dashboard({campaign, selectedTeamId, selectedTeamTitle}) {
               <h1 className={'title'}>
                   <span className={'title__campaign'}>{campaign_name}</span>
                   {`${selectedTeamTitle && ' - '}`}
-                  <span className={'title__team'}>{selectedTeamTitle}</span>
+                  <span className={'title__team'}>{unCamelCase(selectedTeamTitle)}</span>
               </h1>
           </header>
           <main className="dashboard">

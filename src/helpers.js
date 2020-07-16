@@ -1,3 +1,6 @@
+
+const unCamelCase = (str) => str.replace(/([a-z](?=[A-Z]))/g, '$1 ');
+
 const getCurrentTasks = async (cb) => {
     const avoidCors = 'https://cors-anywhere.herokuapp.com/';
     cb(true);
@@ -14,4 +17,4 @@ const getCurrentTasks = async (cb) => {
     }
 };
 
-export { getCurrentTasks };
+export { getCurrentTasks, unCamelCase };

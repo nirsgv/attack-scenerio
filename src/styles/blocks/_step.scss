@@ -1,0 +1,33 @@
+.step {
+  display: flex;
+  margin: 0 2rem 2rem 0;
+  position: relative;
+
+  &--in_progress{
+    border-radius: .5rem;
+    padding: 1rem;
+    width: 24rem;
+    margin: 0 1rem 1rem 0;
+    color: #fff;
+    animation-name: btnInProgress;
+    animation-iteration-count: infinite;
+    animation-direction: alternate-reverse;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+
+    > span {
+      color: #eee;
+      width: 2.4rem;
+      margin-right: 0.8rem;
+    }
+
+  }
+  &--not_started{
+    color:#fff;
+    display: block;
+  }
+  &--done {
+    color:#666;
+    text-decoration: line-through;
+  }
+}

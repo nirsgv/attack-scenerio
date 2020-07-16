@@ -10,7 +10,7 @@ import { setCampaignStore } from "./actions";
 
 import {setSelectedTeam} from './actions';
 import Preloader from "./components/preloader";
-import {getCurrentTasks} from './helpers'
+import { getCurrentTasks } from './helpers'
 
 function App({ campaign, setCampaignStore, setSelectedTeam, selectedTeamId, selectedTeamTitle }) {
 
@@ -37,12 +37,14 @@ function App({ campaign, setCampaignStore, setSelectedTeam, selectedTeamId, sele
     return (
     <div className="App" data-test="App">
       <aside className="aside">
-          <section className="logo">
-              <SvgSprite name='SKEE_MASK_DUATONE'/>
-              <button onClick={() => getItems(setPreloader)}>Monitor new threats</button>
+          <section className="logo" onClick={() => getItems(setPreloader)}>
+              <SvgSprite name="SKEE_MASK_DUATONE"/>
+              <div className="btn__wrap">
+                  <button className="btn btn__get-items">Monitor new threats</button>
+              </div>
           </section>
           <nav className="main">
-              <List baseClassName={'menu'}>
+              <List baseClassName={"menu"}>
                   {menuItems.map((item, i) => <MenuItem name={item.team_name} id={item.team_id} setSelectedTeam={setSelectedTeam} selectedTeamId={selectedTeamId} key={i}/>)}
               </List>
           </nav>

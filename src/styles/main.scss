@@ -1,9 +1,34 @@
-@import 'mixins.scss';
 @import 'reset.scss';
 @import 'color.scss';
+@import 'animation.scss';
 @import 'blocks/_title.scss';
+@import 'blocks/_menu-item.scss';
+@import 'blocks/_step.scss';
+@import 'blocks/_btn.scss';
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
 $logo-height: 14rem;
+
+.App {
+    padding-bottom: 1rem;
+    display: flex;
+    height: 100vh;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+header {
+    height: $logo-height;
+    padding: 0 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ccc;
+}
 
 .dashboard {
     padding: 0 4rem;
@@ -41,55 +66,6 @@ $logo-height: 14rem;
     flex-wrap: wrap;
 }
 
-.step {
-    display: flex;
-    margin: 0 2rem 2rem 0;
-    position: relative;
-
-    &--in_progress{
-        background-color: white;
-        border: 1px solid #ccc;
-        border-radius: .5rem;
-        padding: 1rem;
-        width: 24rem;
-        min-height: 10rem;
-        margin: 0 1rem 1rem 0;
-        color: $bkg-3;
-        animation-name: inProgress;
-        animation-iteration-count: infinite;
-        animation-direction: alternate-reverse;
-        animation-duration: 1s;
-        animation-timing-function: ease-in-out;
-
-        > span {
-            color: #eee;
-            width: 2.4rem;
-            margin-right: 0.8rem;
-        }
-    }
-    &--not_started{
-        color:#fff;
-        display: block;
-    }
-    &--done {
-        color:#666;
-        text-decoration: line-through;
-    }
-}
-
-.App {
-    //min-height: 100vh;
-    padding-bottom: 1rem;
-    display: flex;
-    height: 100vh;
-}
-
-body {
-    font-family: 'Open Sans', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
 h1{
     font-size: 4rem;
     font-weight: 100;
@@ -113,15 +89,22 @@ h3{
 
 .logo {
     font-size: 1rem;
-    //background: red;
     display: flex;
     flex-basis: $logo-height;
     color: #aaa;
     background-color: #eee;
+    cursor: pointer;
 
     & > span {
-        margin: auto;
-        flex-basis: 7rem;
+        transition: transform 0.1s ease-out;
+        margin: auto 1.4rem;
+        flex-basis: 6rem;
+    }
+
+    &:hover {
+        span {
+            transform: scale(1.15);
+        }
     }
 }
 
@@ -131,40 +114,6 @@ nav.main {
     padding: 2rem 2rem 4rem;
     max-height: calc(100vh - #{$logo-height});
     overflow: auto;
-}
-
-.menu-item {
-
-    &__link {
-        display: flex;
-        color: darken( $highlight-3, 20% );
-        flex-direction: row;
-        align-items: center;
-        margin-bottom: 2rem;
-        cursor: pointer;
-        transition: color 0.1s ease-out;
-
-        &--selected {
-            color: lighten( $highlight-3, 10% );
-        }
-
-        &--unselected {
-
-        }
-        & > span {
-            margin-right: 0.8rem;
-            height: 5rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-
-        }
-
-        svg {
-            //padding: 1rem;
-            width: 2rem;
-        }
-    }
 }
 
 section {
@@ -185,29 +134,4 @@ li {
 .to-handle__list {
     display: flex;
     flex-wrap: wrap;
-}
-
-.faded-in-from-bottom {
-    animation-name: fadedInFromBottom;
-    animation-duration: .45s;
-    animation-timing-function: ease-in-out;
-}
-
-@keyframes fadedInFromBottom {
-    from {opacity: .05; transform: translate3d(0rem, .25rem, 0) }
-    to {opacity: 1; transform: translate3d(0rem, 0, 0) }
-}
-
-@keyframes inProgress {
-    from {background-color: #ccc; }
-    to {background-color: #aaa; }
-}
-
-header {
-    height: $logo-height;
-    padding: 0 4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: #ccc;
 }
